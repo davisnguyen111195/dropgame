@@ -4,13 +4,19 @@ import com.badlogic.gdx.Game
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.GL20
+import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
+import com.badlogic.gdx.utils.viewport.StretchViewport
 
 class MainMenu(game: Game) : DropScreen(game) {
     private lateinit var background: TextureRegion
     private lateinit var batch: SpriteBatch
+    private lateinit var viewPort : StretchViewport
+    private lateinit var camera : OrthographicCamera
+    val WORLD_WIDTH = 72f
+    val WORLD_HEIGHT = 128f
     var time = 0f
 
     override fun dispose() {
@@ -20,13 +26,16 @@ class MainMenu(game: Game) : DropScreen(game) {
 
     override fun show() {
         super.show()
+        camera = OrthographicCamera()
+        viewPort = StretchViewport(WORLD_WIDTH, WORLD_HEIGHT, camera)
+
         background = TextureRegion(Texture("background.png"))
         batch = SpriteBatch()
         batch.projectionMatrix.setToOrtho2D(
             0f,
             0f,
-            Gdx.graphics.width.toFloat(),
-            Gdx.graphics.height.toFloat()
+            WORLD_WIDTH,
+            WORLD_HEIGHT
         )
     }
 
@@ -35,7 +44,7 @@ class MainMenu(game: Game) : DropScreen(game) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
         batch.begin()
 
-        batch.draw(background, 0f, 0f)
+        batch.draw(background, 0f, 0f, WORLD_WIDTH, WORLD_HEIGHT)
 
         batch.end()
 
