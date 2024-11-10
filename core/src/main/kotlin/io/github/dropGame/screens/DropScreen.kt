@@ -24,4 +24,5 @@ abstract class DropScreen(protected val mGame: Game) : Screen {
 
     override fun hide() {
     }
+
 }

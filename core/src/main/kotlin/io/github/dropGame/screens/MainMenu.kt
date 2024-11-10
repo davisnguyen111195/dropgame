@@ -9,14 +9,15 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.utils.viewport.StretchViewport
+import io.github.dropGame.Main.Companion.WORLD_HEIGHT
+import io.github.dropGame.Main.Companion.WORLD_WIDTH
 
 class MainMenu(game: Game) : DropScreen(game) {
     private lateinit var background: TextureRegion
     private lateinit var batch: SpriteBatch
     private lateinit var viewPort : StretchViewport
     private lateinit var camera : OrthographicCamera
-    val WORLD_WIDTH = 72f
-    val WORLD_HEIGHT = 128f
+
     var time = 0f
 
     override fun dispose() {
@@ -58,6 +59,7 @@ class MainMenu(game: Game) : DropScreen(game) {
 
     override fun resize(width: Int, height: Int) {
         super.resize(width, height)
+        viewPort.update(width, height, true)
     }
 
     override fun pause() {
