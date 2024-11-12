@@ -75,6 +75,12 @@ class GameScreen(game: Game) : DropScreen(game) {
 
         bucket.draw(batch)
         detectCollisions()
+        drawDrop(batch, delta)
+
+        batch.end()
+    }
+
+    private fun drawDrop(batch: SpriteBatch, delta: Float) {
         val dropListIterator = drops.listIterator()
         while (dropListIterator.hasNext()) {
             val drop = dropListIterator.next()
@@ -86,9 +92,8 @@ class GameScreen(game: Game) : DropScreen(game) {
                 drop.draw(batch)
             }
         }
-
-        batch.end()
     }
+
     private fun input() {
         if(Gdx.input.isTouched) {
 
@@ -140,7 +145,8 @@ class GameScreen(game: Game) : DropScreen(game) {
     }
 
     override fun resize(width: Int, height: Int) {
-        super.resize(width, height)
+        super.resize(width, height )
+        viewPort.update(width, height, true)
     }
 
     override fun pause() {
